@@ -36,12 +36,12 @@ class ItemRecyclerViewAdapter(
     override fun getItemCount(): Int =  1 // values.size
 
      class ViewHolder(binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        val idView: TextView = binding.itemNumber
-        val contentView: TextView = binding.content
-
-        override fun toString(): String {
-            return super.toString() + " '" + contentView.text + "'"
-        }
+//        val idView: TextView = binding.itemNumber
+//        val contentView: TextView = binding.content
+//
+//        override fun toString(): String {
+//            return super.toString() + " '" + contentView.text + "'"
+//        }
     }
 
 }
