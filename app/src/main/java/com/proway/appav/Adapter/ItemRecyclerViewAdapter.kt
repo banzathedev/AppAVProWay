@@ -1,47 +1,54 @@
 package com.proway.appav.Adapter
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
+import androidx.recyclerview.widget.RecyclerView
+
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.proway.appav.R
+import com.proway.appav.model.Products
 
-import com.proway.appav.databinding.FragmentItemBinding
 
-/**
- * [RecyclerView.Adapter] that can display a [PlaceholderItem].
- * TODO: Replace the implementation with code for your data type.
- */
-class ItemRecyclerViewAdapter(
-   // private val values: List<PlaceholderItem>
-) : RecyclerView.Adapter<ItemRecyclerViewAdapter.ViewHolder>() {
+class ItemRecyclerViewAdapterAdapterDaListaDOFrag4(val listOfProducts: MutableList<Products>) :
+    RecyclerView.Adapter<ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
-        return ViewHolder(
-            FragmentItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.fragment_item_list, parent, false)
+        return ViewHolder(itemView)
 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        val item = values[position]
-//        holder.idView.text = item.id
-//        holder.contentView.text = item.content
+
+        listOfProducts[position].apply {
+            holder.bind(this)
+
+        }
     }
 
-    override fun getItemCount(): Int =  1 // values.size
+    override fun getItemCount(): Int = listOfProducts.size
 
-     class ViewHolder(binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
-//        val idView: TextView = binding.itemNumber
-//        val contentView: TextView = binding.content
-//
-//        override fun toString(): String {
-//            return super.toString() + " '" + contentView.text + "'"
-//        }
+
+}
+
+class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    private val name = view.findViewById<TextView>(R.id.itemNameID)
+    private val category = view.findViewById<TextView>(R.id.itemCategoryId)
+    private val price = view.findViewById<TextView>(R.id.itemPriceId)
+    private val imageLogo = view.findViewById<ImageView>(R.id.itemLogoId)
+    fun bind(products: Products) {
+        name.text = products.name
+        category.text = products.category
+        price.text = products.price
+        imageLogo.apply {
+            Glide.with(context)
+                .load(products.image)
+                .placeholder(R.drawable.ic_baseline_access_time_24)
+                .into(this)
+        }
     }
-
 }
