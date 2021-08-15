@@ -1,6 +1,7 @@
 package com.proway.appav.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 
@@ -10,7 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 
 import com.proway.appav.Adapter.ItemRecyclerViewAdapter
+import com.proway.appav.DetailActivity
+import com.proway.appav.MainActivity
 import com.proway.appav.R
+import com.proway.appav.interfaces.ClickableItem
 import com.proway.appav.model.Products
 import com.proway.appav.services.RetrofitBuilder
 import retrofit2.Call
@@ -18,7 +22,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class ItemFragment : Fragment(R.layout.fragment_item), Callback<List<Products>> {
+class ItemFragment : Fragment(R.layout.fragment_item), Callback<List<Products>>, ClickableItem {
     var productsList: List<Products>? = null
     lateinit var recyclerView: RecyclerView
 
@@ -61,8 +65,12 @@ class ItemFragment : Fragment(R.layout.fragment_item), Callback<List<Products>> 
         recyclerView = view.findViewById(R.id.recyclerViewIdOnFragment)
         recyclerView.layoutManager =
             LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
-        recyclerView.adapter =ItemRecyclerViewAdapter(productsList!!)
+        recyclerView.adapter =ItemRecyclerViewAdapter(productsList!!, this)
 
+    }
+
+    override fun onClickGoToDetail(products: Products) {
+        (requireActivity() as? MainActivity)?.goToOtherActivity(products)
     }
 }
 

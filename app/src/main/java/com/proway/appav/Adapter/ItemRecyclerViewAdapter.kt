@@ -9,10 +9,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.proway.appav.R
+import com.proway.appav.interfaces.ClickableItem
 import com.proway.appav.model.Products
 
 
-class ItemRecyclerViewAdapter(val listOfProducts: List<Products>) :
+class ItemRecyclerViewAdapter(
+    val listOfProducts: List<Products>,
+    val onClick: ClickableItem) :
     RecyclerView.Adapter<ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,8 +29,12 @@ class ItemRecyclerViewAdapter(val listOfProducts: List<Products>) :
 
         listOfProducts[position].apply {
             holder.bind(this)
+           holder.itemView.setOnClickListener {
+               onClick.onClickGoToDetail(this)
+           }
 
         }
+
     }
 
     override fun getItemCount(): Int = listOfProducts.size
@@ -41,9 +48,9 @@ class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val price = view.findViewById<TextView>(R.id.itemPriceId)
     private val imageLogo = view.findViewById<ImageView>(R.id.itemLogoId)
     fun bind(products: Products) {
-        name.text = products.name
-        category.text = products.category
-        price.text = products.price.toString()
+        name.text = "Name: ${products.name}"
+        category.text = "Category: ${products.category}"
+        price.text = "Price: $" + products.price.toString()
         imageLogo.apply {
             Glide.with(context)
                 .load(products.image)

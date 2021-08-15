@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.proway.appav.R
 import com.proway.appav.model.Products
 import com.proway.appav.model.User
@@ -20,10 +22,6 @@ class UserSettingsFragment : Fragment(R.layout.fragment_user_settings), Callback
     override fun onAttach(context: Context) {
         super.onAttach(context)
         triggerRequest()
-    }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
     }
 
     private fun triggerRequest() {
@@ -49,17 +47,16 @@ class UserSettingsFragment : Fragment(R.layout.fragment_user_settings), Callback
         emailTextView.text = user!!.email
         userNickName.text = "Welcome ${user!!.username}"
         userCompleteName.text = "Name: ${user!!.name.firstname} ${user!!.name.lastname}"
+
+        view.findViewById<ImageView>(R.id.user_pref_photo).apply {
+            Glide.with(context)
+                .load(R.drawable.ic_avatar_photo)
+                .into(this)
+        }
+
     }
 
     override fun onFailure(call: Call<User>, t: Throwable) {
         TODO("Not yet implemented")
     }
-//        fun newInstance(param1: String, param2: String) =
-//            UserSettingsFragment().apply {
-//                arguments = Bundle().apply {
-//                    putString(ARG_PARAM1, param1)
-//                    putString(ARG_PARAM2, param2)
-//                }
-//            }
-//    }
 }
