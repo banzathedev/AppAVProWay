@@ -12,7 +12,7 @@ import com.proway.appav.R
 import com.proway.appav.model.Products
 
 
-class ItemRecyclerViewAdapterAdapterDaListaDOFrag4(val listOfProducts: MutableList<Products>) :
+class ItemRecyclerViewAdapter(val listOfProducts: List<Products>) :
     RecyclerView.Adapter<ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -43,7 +43,7 @@ class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(products: Products) {
         name.text = products.name
         category.text = products.category
-        price.text = products.price
+        price.text = products.price.toString()
         imageLogo.apply {
             Glide.with(context)
                 .load(products.image)
