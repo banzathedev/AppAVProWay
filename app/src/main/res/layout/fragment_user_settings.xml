@@ -15,8 +15,9 @@
             app:cardElevation="10dp"
             android:layout_margin="@dimen/Medium_16dp"
             app:cardCornerRadius="@dimen/Medium_16dp"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/Medium_16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -38,8 +39,8 @@
                 <TextView
                     android:id="@+id/user_pref_nickname"
                     android:layout_width="0dp"
-                    android:paddingLeft="50dp"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="50dp"
                     android:textSize="20dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -72,21 +73,50 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_baseline_alternate_email_24"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/user_pref_avatar"
-                    android:src="@drawable/ic_baseline_alternate_email_24" />
+                    app:layout_constraintTop_toBottomOf="@+id/user_pref_avatar" />
 
                 <TextView
                     android:id="@+id/user_pref_email_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    tools:text="User Email"
-                    android:textSize="16dp"
                     android:layout_marginLeft="@dimen/default_8dp"
+                    android:layout_marginTop="20dp"
+                    android:textSize="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/user_pref_email_avatar"
-                    app:layout_constraintTop_toBottomOf="@+id/user_pref_complete_name" />
+                    app:layout_constraintTop_toBottomOf="@+id/user_pref_complete_name"
+                    tools:text="User Email" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:alpha="0.2"
+                    android:background="@color/black" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/emailSwitch"
+                    android:layout_width="match_parent"
+                    android:layout_margin="@dimen/default_8dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/email_notification"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/user_pref_email_textView" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/pushSwitch"
+                    android:layout_margin="@dimen/default_8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/push_notifications"
+                    app:layout_constraintTop_toBottomOf="@+id/emailSwitch" />
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 

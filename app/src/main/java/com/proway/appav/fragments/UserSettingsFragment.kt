@@ -9,6 +9,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.switchmaterial.SwitchMaterial
+import com.proway.appav.AppPreferences.AppPreferences
+import com.proway.appav.AppPreferences.Keys
+import com.proway.appav.MainActivity
 import com.proway.appav.R
 import com.proway.appav.model.Products
 import com.proway.appav.model.User
@@ -18,10 +23,40 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class UserSettingsFragment : Fragment(R.layout.fragment_user_settings), Callback<User> {
+    private lateinit var preferences: AppPreferences
+    private lateinit var emailSwitch: SwitchMaterial
+    private lateinit var pushSwitch: SwitchMaterial
+    private lateinit var emailTextView: TextView
+    private lateinit var buttonClear: MaterialButton
+    private var activityManager: MainActivity? = null
     var user: User? = null
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        preferences = AppPreferences(requireContext())
+        activityManager = (requireActivity() as? MainActivity)
         triggerRequest()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        emailSwitch = view.findViewById<SwitchMaterial>(R.id.emailSwitch)
+        pushSwitch = view.findViewById<SwitchMaterial>(R.id.pushSwitch)
+
+        emailSwitch.setOnCheckedChangeListener { button, value ->
+            preferences.setValue<Boolean>(Keys.Notifications_Email, value)
+        }
+        pushSwitch.setOnCheckedChangeListener { button, value ->
+            preferences.setValue<Boolean>(Keys.Notifications_PUSH, value)
+        }
+
+        checkIfHaveSavedValues()
+
+    }
+
+    private fun checkIfHaveSavedValues() {
+        emailSwitch.isChecked = preferences.base.getBoolean(Keys.Notifications_Email.name, false)
+        pushSwitch.isChecked = preferences.base.getBoolean(Keys.Notifications_Email.name, false)
     }
 
     private fun triggerRequest() {
