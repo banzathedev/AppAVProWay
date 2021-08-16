@@ -1,5 +1,6 @@
 package com.proway.appav
 
+import android.content.ClipData
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.view.Menu
 import android.view.View
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.proway.appav.fragments.ItemFragment
 import com.proway.appav.fragments.UserSettingsFragment
 import com.proway.appav.interfaces.ClickableItem
@@ -17,21 +19,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.containerFragmentMainActivity, ItemFragment())
-            .commitNow()
+        replaceFrag(ItemFragment())
 
+        findViewById<BottomNavigationView>(R.id.bottomNav).apply {
+            setOnItemSelectedListener {
+                when (it.itemId) {
+                    R.id.home_page_menu -> replaceFrag(ItemFragment())
+                    R.id.userpraf_page_menu -> replaceFrag(UserSettingsFragment())
+                }
+                true
 
-        findViewById<Button>(R.id.home_page_Button).apply {
-            setOnClickListener {
-                replaceFrag(ItemFragment())
             }
         }
-        findViewById<Button>(R.id.user_pref_Button).apply {
-            setOnClickListener {
-                replaceFrag(UserSettingsFragment())
-            }
-        }
+
     }
 
     private fun replaceFrag(fragment: Fragment) {

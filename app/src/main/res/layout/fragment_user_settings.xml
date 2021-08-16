@@ -13,7 +13,8 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/user_pref_cardView_image"
             app:cardElevation="10dp"
-            android:layout_margin="@dimen/default_8dp"
+            android:layout_margin="@dimen/Medium_16dp"
+            app:cardCornerRadius="@dimen/Medium_16dp"
             android:layout_width="250dp"
             android:layout_height="250dp"
             app:layout_constraintEnd_toEndOf="parent"
