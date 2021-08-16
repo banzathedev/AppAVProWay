@@ -23,6 +23,13 @@ class AppPreferences(context: Context) {
                 putBoolean(key.name, value)
                 commit()
             }
+            is Float -> base.edit{
+                putFloat(key.name, value)
+                commit()
+            }
+            is Long -> base.edit {
+                putLong(key.name, value)
+            }
         }
     }
 }

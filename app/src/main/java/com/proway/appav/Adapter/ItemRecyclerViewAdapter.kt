@@ -15,7 +15,8 @@ import com.proway.appav.model.Products
 
 class ItemRecyclerViewAdapter(
     val listOfProducts: List<Products>,
-    val onClick: ClickableItem) :
+    val onClick: ClickableItem
+) :
     RecyclerView.Adapter<ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,9 +30,9 @@ class ItemRecyclerViewAdapter(
 
         listOfProducts[position].apply {
             holder.bind(this)
-           holder.itemView.setOnClickListener {
-               onClick.onClickGoToDetail(this)
-           }
+            holder.itemView.setOnClickListener {
+                onClick.onClickGoToDetail(this)
+            }
 
         }
 

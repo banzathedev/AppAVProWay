@@ -7,6 +7,6 @@
     <string name="search_label">Search</string>
     <string name="favorites_label">Favorites</string>
     <string name="buy_label">Buy</string>
-    <string name="email_notification">Receber notificacoes no email</string>
-    <string name="push_notifications">recebever notificacoes push</string>
+    <string name="email_notification">Receive email notifications</string>
+    <string name="push_notifications">Receive push notifications</string>
 </resources>
